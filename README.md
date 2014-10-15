@@ -8,13 +8,56 @@ To achieve its magic, Vagrant stands on the shoulders of giants. Machines are pr
 
 **[HOW VAGRANT BENEFITS YOU][1]**
 
-If you're a **developer**, Vagrant will isolate dependencies and their configuration within a single disposable, consistent environment, without sacrificing any of the tools you're used to working with (editors, browsers, debuggers, etc.). Once you or someone else creates a single Vagrantfile, you just need to vagrant up and everything is installed and configured for you to work. Other members of your team create their development environments from the same configuration, so whether you're working on Linux, Mac OS X, or Windows, all your team members are running code in the same environment, against the same dependencies, all configured the same way. Say goodbye to "works on my machine" bugs.
+If you're a ```developer```, Vagrant will isolate dependencies and their configuration within a single disposable, consistent environment, without sacrificing any of the tools you're used to working with (editors, browsers, debuggers, etc.). Once you or someone else creates a single Vagrantfile, you just need to vagrant up and everything is installed and configured for you to work. Other members of your team create their development environments from the same configuration, so whether you're working on Linux, Mac OS X, or Windows, all your team members are running code in the same environment, against the same dependencies, all configured the same way. Say goodbye to "works on my machine" bugs.
 
-If you're an **operations engineer**, Vagrant gives you a disposable environment and consistent workflow for developing and testing infrastructure management scripts. You can quickly test things like shell scripts, Chef cookbooks, Puppet modules, and more using local virtualization such as VirtualBox or VMware. Then, with the same configuration, you can test these scripts on remote clouds such as AWS or RackSpace with the same workflow. Ditch your custom scripts to recycle EC2 instances, stop juggling SSH prompts to various machines, and start using Vagrant to bring sanity to your life.
+If you're an ```operations engineer```, Vagrant gives you a disposable environment and consistent workflow for developing and testing infrastructure management scripts. You can quickly test things like shell scripts, Chef cookbooks, Puppet modules, and more using local virtualization such as VirtualBox or VMware. Then, with the same configuration, you can test these scripts on remote clouds such as AWS or RackSpace with the same workflow. Ditch your custom scripts to recycle EC2 instances, stop juggling SSH prompts to various machines, and start using Vagrant to bring sanity to your life.
 
-If you're a **designer**, Vagrant will automatically set everything up that is required for that web app in order for you to focus on doing what you do best: design. Once a developer configures Vagrant, you don't need to worry about how to get that app running ever again. No more bothering other developers to help you fix your environment so you can test designs. Just check out the code, **vagrant up**, and start designing.
+If you're a ```designer```, Vagrant will automatically set everything up that is required for that web app in order for you to focus on doing what you do best: design. Once a developer configures Vagrant, you don't need to worry about how to get that app running ever again. No more bothering other developers to help you fix your environment so you can test designs. Just check out the code, ```vagrant up```, and start designing.
+
+**￼￼INSTALLATION**
+
+[Virtualbox][4]
+
+[Vagrant][5]
+
+**QUICKSTART**
+
+![image](https://raw.githubusercontent.com/Dakarlug/vagrant_tutorial/master/images/vagrant-box.png)
+
+**Boxes**
+
+Instead of building a virtual machine from scratch, which would be a slow and tedious process, Vagrant uses a base image to quickly clone a virtual machine. These base images are known as boxes in Vagrant, and specifying the box to use for your Vagrant environment is always the first step after creating a new Vagrantfile.
+
+1. ###Box from Vagrant Cloud
+
+**Installing a box
+**
+
+Boxes are added to Vagrant with ```vagrant box add```. This stores the box under a specific name so that multiple Vagrant environments can re-use it.
+
+```
+$ mkdir mylinuxbox && cd mylinuxbox
+$ vagrant box add hashicorp/precise32
+```
+![image](https://raw.githubusercontent.com/Dakarlug/vagrant_tutorial/master/images/box_add.png)
+
+This will download the box named "hashicorp/precise32" from [Vagrant Cloud][6], a place where you can find and host boxes. While it is easiest to download boxes from Vagrant Cloud you can also add boxes from a local file, custom URL, etc.
+
+**Using a box**
+
+Now that the box has been added to Vagrant, we need to configure our project to use it as a base. Open the ```Vagrantfile``` and change the contents to the following:
+
+```
+Vagrant.configure("2") do |config|
+  config.vm.box = "hashicorp/precise32"
+end
+```
+The "hashicorp/precise32" in this case must match the name you used to add the box above. This is how Vagrant knows what box to use. If the box wasn't added before, Vagrant will automatically download and add the box when it is run.
 
 [1]:https://docs.vagrantup.com/v2/why-vagrant/
 [2]:https://docs.vagrantup.com/v2/providers/
 [3]:https://docs.vagrantup.com/v2/provisioning/
+[4]:https://www.virtualbox.org/wiki/Downloads
+[5]:https://www.vagrantup.com/downloads.html
+[6]:https://vagrantcloud.com/
 
