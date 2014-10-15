@@ -96,14 +96,17 @@ It is time to boot your first Vagrant environment. Run the following:
 ```
 mylinuxbox$ $ vagrant up
 ```
-
-![image](https://raw.githubusercontent.com/Dakarlug/vagrant_tutorial/master/images/bvagrant_up.png)
-
 You won't actually see anything though, since Vagrant runs the virtual machine without a UI.
+
+![image](https://raw.githubusercontent.com/Dakarlug/vagrant_tutorial/master/images/vagrant_up.png)
+
 
 ```
 mylinuxbox$ $ vagrant ssh
 ```
+![image](https://raw.githubusercontent.com/Dakarlug/vagrant_tutorial/master/images/vagrant_ssh.png)
+
+
 Take a moment to think what just happened: With just one line of configuration and one command in your terminal, we brought up a fully functional, SSH accessible virtual machine. 
 
 [1]:https://docs.vagrantup.com/v2/why-vagrant/
